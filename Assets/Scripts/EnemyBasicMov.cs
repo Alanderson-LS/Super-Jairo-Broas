@@ -6,6 +6,7 @@ public class EnemyBasicMov : MonoBehaviour
 {
     private bool isDeath = false;
     private Rigidbody2D rb;
+    private int life;
     [SerializeField] private float speed;
     [SerializeField] private GameObject enemy;
     [SerializeField] private int damage;
@@ -13,6 +14,7 @@ public class EnemyBasicMov : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        life = 1;
     }
 
     // Update is called once per frame
@@ -23,17 +25,35 @@ public class EnemyBasicMov : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (!isDeath)
         {
-            Jairo player = other.gameObject.GetComponent<Jairo>();
-            
-            player.TakeDamage(damage);
-        }
-        if (other.gameObject.CompareTag("Wall"))
-        {
-            speed = -speed;
+            if (other.gameObject.CompareTag("Player"))
+            {
+                Jairo player = other.gameObject.GetComponent<Jairo>();
+                player.TakeDamage(damage);
+            }
+            if (other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Enemy"))
+            {
+                speed = -speed;
+            }
         }
     }
+
+    private void Kill()
+    {
+        Destroy(enemy);
+    }
+
+
+    public void TakeDamage(int amount)
+    {
+        life -= amount;
+        if (life <= 0)
+        {
+            Kill();
+        }
+    }
+
 
 }
 
