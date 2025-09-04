@@ -7,6 +7,7 @@ public class Jairo : MonoBehaviour
     private Rigidbody2D rb;
     private bool canJump;
     private bool jumping, walkingRight, walkingLeft;
+    private int life;
     [SerializeField] private float jump, speed;
     [SerializeField] private GameObject Player;
 
@@ -15,6 +16,7 @@ public class Jairo : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         canJump = true;
+        life = 1;
     }
 
     // Update is called once per frame
@@ -71,5 +73,21 @@ public class Jairo : MonoBehaviour
             canJump = true;
         }
     }
-    
+
+    private void Kill()
+    {
+        Destroy(Player);
+    }
+
+
+    public void TakeDamage(int amount)
+    {
+        life -= amount;
+        if (life <= 0)
+        {
+            Kill();
+        }
+    }
+
+
 }
