@@ -8,6 +8,8 @@ public class Jairo : MonoBehaviour
     private bool canJump;
     private bool jumping, walkingRight, walkingLeft;
     private int life;
+    private float walkTimer = 0f;
+    private bool isWalking = false;
     [SerializeField] private float jump, speed;
     [SerializeField] private GameObject Player;
 
@@ -26,26 +28,40 @@ public class Jairo : MonoBehaviour
         {
             jumping = true;
         }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            walkingRight = true;
-        }
         if (Input.GetKey(KeyCode.D))
         {
             walkingRight = true;
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            walkingLeft = true;
+            isWalking = true;
         }
         if (Input.GetKey(KeyCode.A))
         {
             walkingLeft = true;
+            isWalking = true;
+        }
+
+        if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+        {
+            isWalking = false;
+            walkTimer = 0f;
         }
     }
 
     void FixedUpdate()
     {
+        if (isWalking)
+        {
+            walkTimer += Time.fixedDeltaTime;
+        } else {
+            walkTimer = 0f;
+        }
+
+        float currentSpeed = speed;
+
+        if (walkTimer >= 2f) 
+        {
+            currentSpeed *= 2f;
+        }
+
         if (jumping)
         {
             if (canJump)
@@ -57,12 +73,12 @@ public class Jairo : MonoBehaviour
         }
         if (walkingRight)
         {
-            rb.velocity = new Vector2(speed, rb.velocity.y);
+            rb.velocity = new Vector2(currentSpeed, rb.velocity.y);
             walkingRight = false;
         }
         if (walkingLeft)
         {
-            rb.velocity = new Vector2(-speed, rb.velocity.y);
+            rb.velocity = new Vector2(-currentSpeed, rb.velocity.y);
             walkingLeft = false;
         }
     }
