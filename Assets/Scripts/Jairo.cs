@@ -1,0 +1,75 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Jairo : MonoBehaviour
+{
+    private Rigidbody2D rb;
+    private bool canJump;
+    private bool jumping, walkingRight, walkingLeft;
+    [SerializeField] private float jump, speed;
+    [SerializeField] private GameObject Player;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        canJump = true;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            jumping = true;
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            walkingRight = true;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            walkingRight = true;
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            walkingLeft = true;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            walkingLeft = true;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (jumping)
+        {
+            if (canJump)
+            {
+                rb.velocity = Vector2.up * jump;
+                canJump = false;
+                jumping = false;
+            }
+        }
+        if (walkingRight)
+        {
+            rb.velocity = new Vector2(speed, rb.velocity.y);
+            walkingRight = false;
+        }
+        if (walkingLeft)
+        {
+            rb.velocity = new Vector2(-speed, rb.velocity.y);
+            walkingLeft = false;
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            canJump = true;
+        }
+    }
+    
+}
