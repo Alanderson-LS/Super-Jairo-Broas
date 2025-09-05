@@ -13,12 +13,19 @@ public class Jairo : MonoBehaviour
     [SerializeField] private float jump, speed;
     [SerializeField] private GameObject Player;
 
+    private JairoAnimationController anim;
+    private SpriteRenderer sr;
+    private Sprite defaultSprite;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        defaultSprite = sr.sprite;
         canJump = true;
         life = 1;
+        anim = GetComponent<JairoAnimationController>();
     }
 
     // Update is called once per frame
@@ -43,6 +50,15 @@ public class Jairo : MonoBehaviour
         {
             isWalking = false;
             walkTimer = 0f;
+        }
+
+        if (isWalking)
+        {
+            anim.PlayAnimation("JairoWalk");
+        }
+        else
+        {
+            anim.PlayAnimation("JairoIdle");
         }
     }
 
@@ -75,11 +91,24 @@ public class Jairo : MonoBehaviour
         {
             rb.velocity = new Vector2(currentSpeed, rb.velocity.y);
             walkingRight = false;
+
+            if (transform.localScale.x < 0)
+            {
+                Vector3 scale = transform.localScale;
+                scale.x *= -1;
+                transform.localScale = scale;
+            }
         }
         if (walkingLeft)
         {
             rb.velocity = new Vector2(-currentSpeed, rb.velocity.y);
             walkingLeft = false;
+            if (transform.localScale.x > 0)
+            {
+                Vector3 scale = transform.localScale;
+                scale.x *= -1;
+                transform.localScale = scale;
+            }
         }
     }
     private void OnCollisionEnter2D(Collision2D other)
