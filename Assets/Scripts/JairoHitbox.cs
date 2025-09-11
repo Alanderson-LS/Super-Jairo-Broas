@@ -14,7 +14,6 @@ public class JairoHitbox : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("ESSAPORRAFUNCIONA");
         if (other.gameObject.CompareTag("Enemy"))
         {
             if (parte == "body" || parte == "head")

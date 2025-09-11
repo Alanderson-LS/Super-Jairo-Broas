@@ -7,12 +7,12 @@ public class Jairo : MonoBehaviour
     private Rigidbody2D rb;
     private bool canJump;
     private bool jumping, walkingRight, walkingLeft;
-    private int life;
+    public int life;
     private float walkTimer = 0f;
     private bool isWalking = false;
     [SerializeField] private float Jump, Speed;
     [SerializeField] private GameObject Player;
-    public GameObject miniJairo;
+    public GameObject miniJairo, SuperJairo;
     private JairoAnimationController anim;
     private SpriteRenderer sr;
     private Sprite defaultSprite;
@@ -32,6 +32,13 @@ public class Jairo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (life == 1) {
+            miniJairo.SetActive(true);
+            SuperJairo.SetActive(false);
+        } else {
+            SuperJairo.SetActive(true);
+            miniJairo.SetActive(false);
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             jumping = true;
@@ -58,6 +65,8 @@ public class Jairo : MonoBehaviour
             if (life == 1) 
             {
             anim.PlayAnimation("JairoWalk");
+            } else {
+                anim.PlayAnimation("SuperJairoWalk");
             }
         }
         else
@@ -65,6 +74,8 @@ public class Jairo : MonoBehaviour
             if (life == 1) 
             {
             anim.PlayAnimation("JairoIdle");
+            } else {
+                anim.PlayAnimation("SuperJairoIdle");
             }
         }
     }
@@ -138,8 +149,10 @@ public class Jairo : MonoBehaviour
         }
     }
 
-    public void GetLife(){
+    public void GetLife()
+    {
         life = 2;
+        anim.PlayAnimation("growingJairo");
     }
 
 }
