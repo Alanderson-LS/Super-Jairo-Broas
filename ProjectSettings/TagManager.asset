@@ -7,6 +7,9 @@ TagManager:
   - Ground
   - Wall
   - Enemy
+  - JairoBody
+  - JairoHead
+  - JairoFoot
   layers:
   - Default
   - TransparentFX

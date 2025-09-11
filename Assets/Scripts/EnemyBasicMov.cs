@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class EnemyBasicMov : MonoBehaviour
 {
-    private bool isDeath = false;
     private Rigidbody2D rb;
     private int life;
-    [SerializeField] private float speed;
+    [SerializeField] private float Speed;
     [SerializeField] private GameObject enemy;
-    [SerializeField] private int damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,24 +18,17 @@ public class EnemyBasicMov : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = new Vector2(speed, rb.velocity.y);
+        rb.velocity = new Vector2(Speed, rb.velocity.y);
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (!isDeath)
+        if (other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Enemy"))
         {
-            if (other.gameObject.CompareTag("Player"))
-            {
-                Jairo player = other.gameObject.GetComponent<Jairo>();
-                player.TakeDamage(damage);
-            }
-            if (other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Enemy"))
-            {
-                speed = -speed;
-            }
+            Speed = -Speed;
         }
     }
+    
 
     private void Kill()
     {

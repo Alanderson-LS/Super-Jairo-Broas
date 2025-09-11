@@ -10,9 +10,9 @@ public class Jairo : MonoBehaviour
     private int life;
     private float walkTimer = 0f;
     private bool isWalking = false;
-    [SerializeField] private float jump, speed;
+    [SerializeField] private float Jump, Speed;
     [SerializeField] private GameObject Player;
-
+    public GameObject miniJairo;
     private JairoAnimationController anim;
     private SpriteRenderer sr;
     private Sprite defaultSprite;
@@ -26,6 +26,7 @@ public class Jairo : MonoBehaviour
         canJump = true;
         life = 1;
         anim = GetComponent<JairoAnimationController>();
+        miniJairo.SetActive(true);
     }
 
     // Update is called once per frame
@@ -54,11 +55,17 @@ public class Jairo : MonoBehaviour
 
         if (isWalking)
         {
+            if (life == 1) 
+            {
             anim.PlayAnimation("JairoWalk");
+            }
         }
         else
         {
+            if (life == 1) 
+            {
             anim.PlayAnimation("JairoIdle");
+            }
         }
     }
 
@@ -71,7 +78,7 @@ public class Jairo : MonoBehaviour
             walkTimer = 0f;
         }
 
-        float currentSpeed = speed;
+        float currentSpeed = Speed;
 
         if (walkTimer >= 2f) 
         {
@@ -82,7 +89,7 @@ public class Jairo : MonoBehaviour
         {
             if (canJump)
             {
-                rb.velocity = Vector2.up * jump;
+                rb.velocity = Vector2.up * Jump;
                 canJump = false;
                 jumping = false;
             }
@@ -111,12 +118,9 @@ public class Jairo : MonoBehaviour
             }
         }
     }
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            canJump = true;
-        }
+
+    public void EnableJump() {
+        canJump = true;
     }
 
     private void Kill()
@@ -132,6 +136,10 @@ public class Jairo : MonoBehaviour
         {
             Kill();
         }
+    }
+
+    public void GetLife(){
+        life = 2;
     }
 
 }
