@@ -981,7 +981,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.045175076, y: 0.0006496906}
+  m_Offset: {x: 0.009307414, y: 0.0006496906}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -992,7 +992,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.056571, y: 1.0306449}
+  m_Size: {x: 1.1283064, y: 1.0306449}
   m_EdgeRadius: 0
 --- !u!114 &547430930
 MonoBehaviour:
@@ -1465,7 +1465,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.04495573, y: -0.6078086}
+  m_Offset: {x: 0.038108796, y: -0.6078086}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1476,7 +1476,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0514097, y: 0.16504669}
+  m_Size: {x: 1.0069003, y: 0.16504669}
   m_EdgeRadius: 0
 --- !u!114 &665168113
 MonoBehaviour:
@@ -2777,7 +2777,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &1610044092
 BoxCollider2D:
@@ -2971,7 +2971,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7ba1ca37869d74b42914e819d3332381, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

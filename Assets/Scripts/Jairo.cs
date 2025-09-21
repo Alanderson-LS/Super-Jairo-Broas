@@ -110,23 +110,14 @@ public class Jairo : MonoBehaviour
             rb.velocity = new Vector2(currentSpeed, rb.velocity.y);
             walkingRight = false;
 
-            if (transform.localScale.x < 0)
-            {
-                Vector3 scale = transform.localScale;
-                scale.x *= -1;
-                transform.localScale = scale;
-            }
+             sr.flipX = false;
         }
         if (walkingLeft)
         {
             rb.velocity = new Vector2(-currentSpeed, rb.velocity.y);
             walkingLeft = false;
-            if (transform.localScale.x > 0)
-            {
-                Vector3 scale = transform.localScale;
-                scale.x *= -1;
-                transform.localScale = scale;
-            }
+            
+            sr.flipX = true;
         }
     }
 
