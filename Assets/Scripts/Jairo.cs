@@ -32,10 +32,13 @@ public class Jairo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (life == 1) {
+        if (life == 1)
+        {
             miniJairo.SetActive(true);
             SuperJairo.SetActive(false);
-        } else {
+        }
+        else
+        {
             SuperJairo.SetActive(true);
             miniJairo.SetActive(false);
         }
@@ -62,19 +65,23 @@ public class Jairo : MonoBehaviour
 
         if (isWalking)
         {
-            if (life == 1) 
+            if (life == 1)
             {
-            anim.PlayAnimation("JairoWalk");
-            } else {
+                anim.PlayAnimation("JairoWalk");
+            }
+            else
+            {
                 anim.PlayAnimation("SuperJairoWalk");
             }
         }
         else
         {
-            if (life == 1) 
+            if (life == 1)
             {
-            anim.PlayAnimation("JairoIdle");
-            } else {
+                anim.PlayAnimation("JairoIdle");
+            }
+            else
+            {
                 anim.PlayAnimation("SuperJairoIdle");
             }
         }
@@ -85,13 +92,15 @@ public class Jairo : MonoBehaviour
         if (isWalking)
         {
             walkTimer += Time.fixedDeltaTime;
-        } else {
+        }
+        else
+        {
             walkTimer = 0f;
         }
 
         float currentSpeed = Speed;
 
-        if (walkTimer >= 2f) 
+        if (walkTimer >= 2f)
         {
             currentSpeed *= 2f;
         }
@@ -110,18 +119,19 @@ public class Jairo : MonoBehaviour
             rb.velocity = new Vector2(currentSpeed, rb.velocity.y);
             walkingRight = false;
 
-             sr.flipX = false;
+            sr.flipX = false;
         }
         if (walkingLeft)
         {
             rb.velocity = new Vector2(-currentSpeed, rb.velocity.y);
             walkingLeft = false;
-            
+
             sr.flipX = true;
         }
     }
 
-    public void EnableJump() {
+    public void EnableJump()
+    {
         canJump = true;
     }
 
@@ -140,10 +150,15 @@ public class Jairo : MonoBehaviour
         }
     }
 
-    public void GetLife()
+    public void IncreaseLife()
     {
         life = 2;
         anim.PlayAnimation("growingJairo");
+    }
+    
+    public int GetLife()
+    {
+        return life;
     }
 
 }

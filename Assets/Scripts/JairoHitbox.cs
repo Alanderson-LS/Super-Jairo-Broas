@@ -29,6 +29,17 @@ public class JairoHitbox : MonoBehaviour
         if (other.gameObject.CompareTag("Ground") && parte == "foot")
         {
             player.EnableJump();
-        } 
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Bread"))
+        {
+            Destroy(other);
+            if (player.GetLife() == 1)
+            {
+                player.IncreaseLife();
+            }
+        }
     }
 }
